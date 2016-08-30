@@ -15,5 +15,6 @@ npm install
 ```
 npm start
 ```
+本地服务器开启成功后,即可访问localhost:8360查看本地效果
 
 演示地址:[黄尧鑫的小站](http://huangyaoxin.com)
