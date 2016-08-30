@@ -8,6 +8,7 @@ npm install
 ```
 ##导入数据库至mysql
 数据库文件位于项目根目录下 init.sql
+导入之前请自行创建名为blog的数据库,打开数据库后执行导入init.sql
 ## Start server
 依赖安装完执行以下命令开启本地服务器:
 ```
