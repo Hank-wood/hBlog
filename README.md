@@ -10,17 +10,17 @@ hBlog使用说明
 ```
 npm install
 ```
-### 导入数据库至mysql
+#### 导入数据库至mysql
 
 数据库文件位于项目根目录下 init.sql
 
 导入之前请自行创建名为blog的数据库,打开数据库后执行导入init.sql
 
-### 修改数据库配置文件
+#### 修改数据库配置文件
 
 数据库连接配置在项目目录下:src/common/config/db.js
 
-### Start server
+#### Start server
 
 依赖安装完执行以下命令开启本地服务器:
 
@@ -28,6 +28,8 @@ npm install
 npm start
 ```
 本地服务器开启成功后,即可访问localhost:8360查看本地效果
+后台地址为localhost:8360/admin
+默认账号密码 admin admin
 
 演示地址:[黄尧鑫的小站](http://huangyaoxin.com)
 
