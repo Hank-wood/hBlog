@@ -2480,7 +2480,6 @@ table.dataTable thead .sorting:after {
 .dd-handle:hover {
     background: #f0f0f0;
     cursor: pointer;
-    font-weight: bold;
 }
 
 .dd-item > button {

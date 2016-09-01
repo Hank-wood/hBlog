@@ -22,103 +22,94 @@
                         <h5>添加文章</h5>
                     </div>
                     <div class="ibox-content">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>顺序</th>
-                                    <th>名称</th>
-                                    <th>操作</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                        <!--树形菜单-->
+                        <div class="dd" id="nestable">
+                            <ol class="dd-list">
                                 <?line.forEach(function(item){?>
-                                    <tr>
-                                        <td>
-                                            <input type="text" value="<?=item.orders?>" class="ordersValue" data-id="<?=item.id?>">
-                                        </td>
-                                        <td><?=item.name?></td>
-                                        <td>
-                                            <button class="btn btn-info btn-xs alterTop" type="button" data-toggle="modal" data-target="#alterTopModal" data-id="<?=item.id?>">
+                                <li class="dd-item dd_top" data-id="<?=item.orders?>">
+                                    <div class="dd-handle">
+                                        <span class="list_name"><?=item.name?></span>
+                                        <div class="ibox-tools">
+                                            <button style="margin-bottom:0;" class="btn btn-info btn-xs alterTop" type="button" data-toggle="modal" data-target="#alterTopModal" data-id="<?=item.id?>">
                                                 <i class="fa fa-paste"></i>
                                                 编辑
                                             </button>
-                                            <button class="btn btn-primary btn-xs twoArticle" type="button" data-toggle="modal" data-target="#myModal" data-id="<?=item.id?>" data-type="add">
+                                            <button style="margin-bottom:0;" class="btn btn-primary btn-xs twoArticle" type="button" data-toggle="modal" data-target="#myModal" data-id="<?=item.id?>" data-type="add">
                                                 <i class="fa fa-check"></i>
                                                 添加子分类
                                             </button>
-                                            <button type="button" class="btn btn-w-m btn-danger btn-xs deleteBtn" data-id="<?=item.id?>">
+                                            <button style="margin-bottom:0;" type="button" class="btn btn-w-m btn-danger btn-xs deleteBtn" data-id="<?=item.id?>">
                                                 删除
                                             </button>
-                                        </td>
-                                    </tr>
-                                    <?item.twoCategory.forEach(function(vl){?>
-                                        <tr>
-                                            <td>0</td>
-                                            <td style="padding-left:30px;">┕<?=vl.name?></td>
-                                            <td>
-                                                <button class="btn btn-info btn-xs twoArticle" type="button" data-toggle="modal" data-target="#myModal" data-id="<?=vl.id?>" data-type="editing">
-                                                    <i class="fa fa-paste"></i>
-                                                    编辑
-                                                </button>
-                                                <button class="btn btn-primary btn-xs twoArticle" type="button" data-toggle="modal" data-target="#myModal" data-id="<?=vl.id?>" data-type="add">
-                                                    <i class="fa fa-check"></i>
-                                                    添加子分类
-                                                </button>
-                                                <button type="button" class="btn btn-w-m btn-danger btn-xs deleteBtn" data-id="<?=vl.id?>">
-                                                    删除
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <?vl.threeCategory.forEach(function(tl){?>
-                                            <tr>
-                                                <td>0</td>
-                                                <td style="padding-left:60px;">┕<?=tl.name?></td>
-                                                <td>
-                                                    <button class="btn btn-info btn-xs twoArticle" type="button" data-toggle="modal" data-target="#myModal" data-id="<?=tl.id?>" data-type="editing">
+                                        </div>
+                                    </div>
+                                    <ol class="dd-list">
+                                        <?item.twoCategory.forEach(function(vl){?>
+                                        <li class="dd-item">
+                                            <div class="dd-handle">
+                                                <span class="list_name"><?=vl.name?></span>
+                                                <div class="ibox-tools">
+                                                    <button style="margin-bottom:0;" class="btn btn-info btn-xs twoArticle" type="button" data-toggle="modal" data-target="#myModal" data-id="<?=vl.id?>" data-type="editing">
                                                         <i class="fa fa-paste"></i>
                                                         编辑
                                                     </button>
-                                                    <button class="btn btn-primary btn-xs twoArticle" type="button" data-toggle="modal" data-target="#myModal" data-id="<?=tl.id?>" data-type="add">
+                                                    <button style="margin-bottom:0;" class="btn btn-primary btn-xs twoArticle" type="button" data-toggle="modal" data-target="#myModal" data-id="<?=vl.id?>" data-type="add">
                                                         <i class="fa fa-check"></i>
                                                         添加子分类
                                                     </button>
-                                                    <button type="button" class="btn btn-w-m btn-danger btn-xs deleteBtn"  data-id="<?=tl.id?>">
+                                                    <button style="margin-bottom:0;" type="button" class="btn btn-w-m btn-danger btn-xs deleteBtn" data-id="<?=vl.id?>">
                                                         删除
                                                     </button>
-                                                </td>
-                                            </tr>
-                                            <?tl.fourCategory.forEach(function(fl){?>
-                                                <tr>
-                                                    <td>0</td>
-                                                    <td style="padding-left:90px;">┕<?=fl.name?></td>
-                                                    <td>
-                                                        <button class="btn btn-info btn-xs twoArticle" type="button" data-toggle="modal" data-target="#myModal" data-id="<?=fl.id?>" data-type="editing">
-                                                            <i class="fa fa-paste"></i>
-                                                            编辑
-                                                        </button>
-                                                        <button type="button" class="btn btn-w-m btn-danger btn-xs deleteBtn"  data-id="<?=fl.id?>">
-                                                            删除
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            <?})?>
+                                                </div>
+                                            </div>
+                                            <ol class="dd-list">
+                                                <?vl.threeCategory.forEach(function(tl){?>
+                                                <li class="dd-item">
+                                                    <div class="dd-handle">
+                                                        <span class="list_name"><?=tl.name?></span>
+                                                        <div class="ibox-tools">
+                                                            <button style="margin-bottom:0;" class="btn btn-info btn-xs twoArticle" type="button" data-toggle="modal" data-target="#myModal" data-id="<?=tl.id?>" data-type="editing">
+                                                                <i class="fa fa-paste"></i>
+                                                                编辑
+                                                            </button>
+                                                            <button style="margin-bottom:0;" class="btn btn-primary btn-xs twoArticle" type="button" data-toggle="modal" data-target="#myModal" data-id="<?=tl.id?>" data-type="add">
+                                                                <i class="fa fa-check"></i>
+                                                                添加子分类
+                                                            </button>
+                                                            <button style="margin-bottom:0;" type="button" class="btn btn-w-m btn-danger btn-xs deleteBtn" data-id="<?=tl.id?>">
+                                                                删除
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <ol class="dd-list">
+                                                        <?tl.fourCategory.forEach(function(fl){?>
+                                                            <li class="dd-item">
+                                                                <div class="dd-handle">
+                                                                    <span class="list_name"><?=fl.name?></span>
+                                                                    <div class="ibox-tools">
+                                                                        <button style="margin-bottom:0;" class="btn btn-info btn-xs twoArticle" type="button" data-toggle="modal" data-target="#myModal" data-id="<?=fl.id?>" data-type="editing">
+                                                                            <i class="fa fa-paste"></i>
+                                                                            编辑
+                                                                        </button>
+                                                                        <button style="margin-bottom:0;" type="button" class="btn btn-w-m btn-danger btn-xs deleteBtn" data-id="<?=fl.id?>">
+                                                                            删除
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        <?})?>
+                                                    </ol>
+                                                </li>
+                                                <?})?>
+                                            </ol>
+                                        </li>
                                         <?})?>
-                                    <?})?>
+                                    </ol>
+                                </li>
                                 <?})?>
-                                <tr>
-                                    <td>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-success btn-xs" type="button" id="saveOrder">
-                                            保存顺序设置
-                                        </button>
-                                        <button class="btn btn-primary btn-xs" type="button" data-toggle="modal" data-target="#topModal">
-                                            添加顶级分类
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                            </ol>
+                        </div>
+                        <!--end-->
                     </div>
                 </div>
             </div>
@@ -221,6 +212,8 @@
     <script src="/static/admin/js/plugins/peity/jquery.peity.min.js"></script>
     <!-- wang -->
     <script type="text/javascript" src="/static/admin/js/wangEditor.min.js"></script>
+    <!--树形菜单-->
+    <script type="text/javascript" src="/static/admin/js/jquery.nestable.js"></script>
     <!--初始化富文本编辑器-->
     <script type="text/javascript">
         var editor = new wangEditor('twoContent');
@@ -228,6 +221,35 @@
     </script>
     <script>
         $(document).ready(function(){
+            //初始化树形菜单
+            $('.dd').nestable({});
+            $('.dd-handle button').on('mousedown', function(e){
+                e.stopPropagation();
+            });
+            $('#nestable').nestable().on('change', function(){ 
+                var r = $('.dd').nestable('serialize'); 
+                console.log(JSON.stringify(r));    //改变排序之后的数据
+                //更改排序
+                var orderObj = [];
+                $(".dd_top").each(function(){
+                    orderObj.push($(this).data("id"));
+                });
+                console.log(orderObj)
+                // $.ajax({
+                //     type : 'POST',
+                //     url : '/admin/article/setorder',
+                //     data : {
+                //         content : JSON.stringify(orderObj)
+                //     },
+                //     success : function(data){
+                //         if(data.errno != 0){
+                //             alert("更新失败");
+                //         } else{
+                //             location.reload();
+                //         }
+                //     }
+                // });
+            });
             //添加顶级分类
             $("#addTop").on("click",function(){
                 var topValue = $("#topValue").val();
@@ -330,7 +352,7 @@
                 $("#altertopValue").val("");
                 $("#alterTop").unbind("click");
                 var alterId  = $(this).data("id");
-                var alterVal = $(this).parent().prev().text();
+                var alterVal = $(this).parent().parent().find(".list_name").text();
                 $("#altertopValue").val(alterVal);
                 $("#alterTop").on("click",function(){
                     var alterC = $("#altertopValue").val();
@@ -352,30 +374,6 @@
                 });
             });
 
-            //更改排序
-            $("#saveOrder").on("click",function(){
-                var orderObj = [];
-                $(".ordersValue").each(function(){
-                    orderObj.push({
-                        id  : $(this).data("id"),
-                        order : $(this).val()
-                    });
-                });
-                $.ajax({
-                    type : 'POST',
-                    url : '/admin/article/setorder',
-                    data : {
-                        content : JSON.stringify(orderObj)
-                    },
-                    success : function(data){
-                        if(data.errno != 0){
-                            alert("更新失败");
-                        } else{
-                            location.reload();
-                        }
-                    }
-                });
-            });
 
             //删除
             $(".deleteBtn").on("click",function(){
