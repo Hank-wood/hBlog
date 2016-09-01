@@ -9,7 +9,6 @@ export default class extends Base {
 		let category 	= yield model.readTopClass();
 		let cPath  		= this.http.get("type");
 		let ids 		= this.http.get("id");
-		let orderArticle = this.orderArticle(category);
 
 		switch(cPath){
 			case 'list':
@@ -63,13 +62,12 @@ export default class extends Base {
 			detialData[i].parents = [];
 			detialData[i].parents = detialChild;
 		}
-		//顶级分类排序
-		let orderArticle = this.orderArticle(category);
+
 		//获取文章详情
 		let cContent = yield cModel.readIdContent(ids);
 		this.assign({
 			'title' : resObj.name,
-			'allCategory' : orderArticle,
+			'allCategory' : category,
 			'listLength' : listLength,
 			'leftData' : detialData,
 			'content' : cContent.content,
@@ -77,19 +75,5 @@ export default class extends Base {
 			'url' : tsUrl
 		});
 		return this.display();
-	}
-
-	//数组内对象带有order字段的数组进行排序
-	orderArticle(arr){
-		for(let i = 0; i < arr.length-1; i++){
-			for(let j = i+1; j < arr.length; j++){
-				if(arr[i].orders>arr[j].orders){
-					let temp = arr[i];
-					arr[i] = arr[j];
-					arr[j] = temp;
-				}
-			}
-		}
-		return arr;
 	}
 }

@@ -20,13 +20,16 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>添加文章</h5>
+                        <div class="ibox-tools">
+                            <button class="btn btn-info btn-xs" data-toggle="modal" data-target="#topModal">添加顶级分类</button>
+                        </div>
                     </div>
                     <div class="ibox-content">
                         <!--树形菜单-->
                         <div class="dd" id="nestable">
                             <ol class="dd-list">
                                 <?line.forEach(function(item){?>
-                                <li class="dd-item dd_top" data-id="<?=item.orders?>">
+                                <li class="dd-item dd_top" data-id="<?=item.id?>" data-path="<?=item.path?>" data-order="<?=item.orders?>">
                                     <div class="dd-handle">
                                         <span class="list_name"><?=item.name?></span>
                                         <div class="ibox-tools">
@@ -45,7 +48,7 @@
                                     </div>
                                     <ol class="dd-list">
                                         <?item.twoCategory.forEach(function(vl){?>
-                                        <li class="dd-item">
+                                        <li class="dd-item" data-id="<?=vl.id?>" data-path="<?=vl.path?>">
                                             <div class="dd-handle">
                                                 <span class="list_name"><?=vl.name?></span>
                                                 <div class="ibox-tools">
@@ -64,7 +67,7 @@
                                             </div>
                                             <ol class="dd-list">
                                                 <?vl.threeCategory.forEach(function(tl){?>
-                                                <li class="dd-item">
+                                                <li class="dd-item" data-id="<?=tl.id?>" data-path="<?=tl.path?>">
                                                     <div class="dd-handle">
                                                         <span class="list_name"><?=tl.name?></span>
                                                         <div class="ibox-tools">
@@ -83,7 +86,7 @@
                                                     </div>
                                                     <ol class="dd-list">
                                                         <?tl.fourCategory.forEach(function(fl){?>
-                                                            <li class="dd-item">
+                                                            <li class="dd-item" data-id="<?=fl.id?>" data-path="<?=fl.path?>">
                                                                 <div class="dd-handle">
                                                                     <span class="list_name"><?=fl.name?></span>
                                                                     <div class="ibox-tools">
@@ -222,33 +225,33 @@
     <script>
         $(document).ready(function(){
             //初始化树形菜单
-            $('.dd').nestable({});
+            $('#nestable').nestable({
+                maxDepth : 4
+            });
+            //树形菜单默认展开状态
+            //$("#nestable").nestable('collapseAll');
+            //屏蔽树形菜单点击事件
             $('.dd-handle button').on('mousedown', function(e){
                 e.stopPropagation();
             });
             $('#nestable').nestable().on('change', function(){ 
                 var r = $('.dd').nestable('serialize'); 
-                console.log(JSON.stringify(r));    //改变排序之后的数据
-                //更改排序
-                var orderObj = [];
-                $(".dd_top").each(function(){
-                    orderObj.push($(this).data("id"));
-                });
-                console.log(orderObj)
-                // $.ajax({
-                //     type : 'POST',
-                //     url : '/admin/article/setorder',
-                //     data : {
-                //         content : JSON.stringify(orderObj)
-                //     },
-                //     success : function(data){
-                //         if(data.errno != 0){
-                //             alert("更新失败");
-                //         } else{
-                //             location.reload();
-                //         }
-                //     }
-                // });
+                var orderContent = JSON.stringify(r);
+                console.log(orderContent)
+                $.ajax({
+                    type : 'POST',
+                    url : '/admin/article/setorder',
+                    data : {
+                        content : orderContent
+                    },
+                    success : function(data){
+                        if(data.errno == 0){
+                            alert("更新成功");
+                        } else {
+                            alert("更新失败");
+                        }
+                    }
+                })
             });
             //添加顶级分类
             $("#addTop").on("click",function(){
@@ -373,8 +376,6 @@
                     });
                 });
             });
-
-
             //删除
             $(".deleteBtn").on("click",function(){
                 var tsId = $(this).data("id");

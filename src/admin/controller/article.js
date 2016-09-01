@@ -31,7 +31,7 @@ export default class extends Base {
         }
         //console.log(data)
         this.assign({
-            'line' : this.orderArticle(data)
+            'line' : data
         });
         return this.display();
     }
@@ -136,24 +136,29 @@ export default class extends Base {
         let data = JSON.parse(this.http.post("content"));
         let model = this.model('home_category');
         let updateId;
+        //以数组下标为顺序
         for(let i = 0; i < data.length; i++){
-            updateId = yield model.updateIdContent(data[i].id,data[i].order);
+            updateId = yield model.updateIdContent(data[i].id,i);
+            let updateTop = yield model.updateTopPath(data[i].id);
+            if(!(think.isEmpty(data[i].children))){
+                for(let x = 0; x < data[i].children.length; x++){
+                    let updateTwo = yield model.updateIdContent(data[i].children[x].id,x);
+                    let updateTwoPath = yield model.updateNoContent(data[i].id,data[i].children[x].id);
+                    if(!(think.isEmpty(data[i].children[x].children))){
+                        for(let f = 0; f < data[i].children[x].children.length; f++){
+                            let updateFour = yield model.updateIdContent(data[i].children[x].children[f].id,f);
+                            let updateFourPath = yield model.updateNoContent(data[i].children[x].id,data[i].children[x].children[f].id);
+                            if(!(think.isEmpty(data[i].children[x].children[f].children))){
+                                for(let w = 0; w < data[i].children[x].children[f].children.length; w++){
+                                    let updateFive = yield model.updateIdContent(data[i].children[x].children[f].children[w].id,w);
+                                    let updateFivePath = yield model.updateNoContent(data[i].children[x].children[f].id,data[i].children[x].children[f].children[w].id);
+                                }
+                            }
+                        }
+                    }
+                }   
+            }
         }
         return this.success(updateId);
     }
-
-
-    //数组内对象带有order字段的数组进行排序
-	orderArticle(arr){
-		for(let i = 0; i < arr.length-1; i++){
-			for(let j = i+1; j < arr.length; j++){
-				if(arr[i].orders>arr[j].orders){
-					let temp = arr[i];
-					arr[i] = arr[j];
-					arr[j] = temp;
-				}
-			}
-		}
-		return arr;
-	}
 }
