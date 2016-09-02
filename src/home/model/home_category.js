@@ -15,4 +15,8 @@ export default class extends think.model.base {
     readId(id){
         return this.where({id:id}).find();
     }
+    //文章点击次数
+    articleChildClick(id){
+        return this.where({id:id}).increment("click",1);
+    }
 }

@@ -48,7 +48,8 @@
 									<?=vl.brief?>
 								</p>
 							</div>
-							<a href="/home/index/detial/id/<?=vl.id?>/path/<?=vl.id?>" title="阅读全文" style="color:#42b983;font-size:13px;">阅读全文</a>
+							<a href="/home/index/detial/id/<?=vl.id?>/path/<?=vl.id?>" title="阅读全文" class="readAll">阅读全文</a>
+							<span class="readNumber">阅读:<?=vl.click?></span>
 						</div>
 					<?})?>
 				<?})?>
@@ -66,7 +67,8 @@
 								<?=item.brief?>
 							</p>
 						</div>
-						<a href="/home/index/detial/id/<?=item.id?>/path/<?=item.id?>" title="阅读全文" style="color:#42b983;font-size:13px;">阅读全文</a>
+						<a href="/home/index/detial/id/<?=item.id?>/path/<?=item.id?>" title="阅读全文" class="readAll">阅读全文</a>
+						<span class="readNumber">阅读:<?=item.click?></span>
 					</div>
 				<?})?>
 			<?}?>

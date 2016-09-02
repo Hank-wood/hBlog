@@ -47,6 +47,8 @@ export default class extends Base {
 		let model 	= this.model('home_category'); 
 		let cModel  = this.model('home_content');
 		let tsUrl = this.http.url;
+		//更新点击次数
+		let updateClick = model.articleChildClick(fatherId);
 		//获取顶级分类
 		let category= yield model.readTopClass();
 		//获取当前文章单条

@@ -125,7 +125,7 @@ export default class extends Base {
         let model = this.model('home_category');
         let cModel = this.model('home_content');
 
-        let insertId = yield model.modifiedIdHead(path,data,brief);;
+        let insertId = yield model.modifiedIdHead(path,data,brief);
         let insertContent = yield cModel.modifiedIdContent(path,content);
         
         return this.success(insertId);
