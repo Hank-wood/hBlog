@@ -220,6 +220,9 @@
     <!--初始化富文本编辑器-->
     <script type="text/javascript">
         var editor = new wangEditor('twoContent');
+        //关闭js过滤
+        editor.config.jsFilter = false;
+        //创建富文本编辑器
         editor.create();
     </script>
     <script>

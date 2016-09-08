@@ -2,3 +2,6 @@
 app
 node_modules
 runtime
+src/demo
+view/demo
+www/static/demo
